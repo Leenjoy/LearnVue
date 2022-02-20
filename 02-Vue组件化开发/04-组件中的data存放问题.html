@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div id = "app">
+            <cpn></cpn>
+            <cpn></cpn>
+            <cpn></cpn>
+        </div>
+      
+        <template id='cpn'>
+            <div>
+                <h2>当前计数：{{counter}}</h2>
+                <button @click="increment">+</button>
+                <button @click="decrement">-</button>
+            </div>
+          
+        </template>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script>
+            // 1.注册一个全局组件
+            // 如果要求是同一个数据对象，则先定义一个obj,然后data统一返回obj
+            // const obj = {
+            //     counter: 0
+            // }
+            Vue.component('cpn',{
+                template: '#cpn',
+                data() {
+                    return {
+                        counter: 0
+                    }
+
+                    // return obj
+                },
+                methods: {
+                    increment() {
+                        this.counter++
+                    },
+                    decrement() {
+                        this.counter--
+                    }
+                }
+            })
+        </script>
+        
+        <script>
+            const app = new Vue({
+                el: '#app',
+               
+            })
+        </script>
+    </body>
+</html>

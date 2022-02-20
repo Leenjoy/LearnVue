@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 只有第一次有异步处理，其他下面只是对resolve进行处理没有异步
+    new Promise ((resolve, reject) => {
+      setTimeout(() => {
+        resolve('aaa')
+      },1000)
+    }).then( res => {
+      // 1. 自己处理的10行代码
+      console.log(res,'第一层的10行处理代码');
+
+      // 2. 对结果进行第一次的处理
+      return new Promise ((resolve) => {
+        resolve(res + '111')
+      }).then(res => {
+        console.log(res, '第二层的10行处理代码');  
+
+        // 3. 对结果进行第二次的处理
+        return new Promise ((resolve) => {
+          resolve(res + '222')
+        }).then(res => {
+          console.log(res, '第三层的10行处理代码');  
+        })
+      })
+    })
+
+  
+    // new Promise(resolve => resolve(结果))简写
+    new Promise ((resolve, reject) => {
+      setTimeout(() => {
+        resolve('aaa')
+      },1000)
+    }).then(res => {
+      // 1. 自己处理的10行代码
+      console.log(res,'第一层的10行处理代码');
+
+      // 2. 对结果进行第一次的处理
+        return  Promise.resolve (res + '111')
+      }).then(res => {
+        console.log(res, '第二层的10行处理代码');  
+
+      // 3. 对结果进行第二次的处理
+        return Promise.resolve (res + '222') 
+      }).then(res => {
+        console.log(res, '第三层的10行处理代码');  
+      })
+
+
+    // 甚至可以直接省去 Promise.resolve,直接在then()中return
+    new Promise ((resolve, reject) => {
+    setTimeout(() => {
+      resolve('aaa')
+    },1000)
+    }).then(res => {
+      // 1. 自己处理的10行代码
+      console.log(res,'第一层的10行处理代码');
+      // 2. 对结果进行第一次的处理
+        return res + '111'
+
+        // 拿到错误消息的两种方式
+        // return Promise.reject('error message')
+        // throw 'error message'
+      }).then(res => {
+        console.log(res, '第二层的10行处理代码');  
+
+      // 3. 对结果进行第二次的处理
+        return res + '222'
+      }).then(res => {
+        console.log(res, '第三层的10行处理代码');  
+      }).catch(err => {
+        console.log(err);
+      })
+  </script>
+</body>
+</html>

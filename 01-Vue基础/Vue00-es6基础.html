@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div id = app>
+           <button>按钮1</button>
+           <button>按钮2</button>
+           <button>按钮3</button>
+           <button>按钮4</button>
+           <button>按钮5</button>
+        </div>
+        <script>
+        // 情况一：es5没有使用闭包(错误方式)
+        //  var btns = document.getElementsByTagName('button');
+        //  for(var i = 0; i < btns.length; i++){
+        //      btns[i].addEventListener('click', function(){
+        //        console.log('第' + i + '个按钮被点击');
+        //      })
+        //  }
+
+        // 情况二：es5使用闭包
+        // var btns = document.getElementsByTagName('button');
+        //  for(var i = 0; i < btns.length; i++){
+        //      (function(i){
+        //         btns[i].addEventListener('click', function(){
+        //        console.log('第' + i + '个按钮被点击');
+        //      })
+        //     })(i)         
+        //  }
+
+        //  情况三：es6
+        var btns = document.getElementsByTagName('button');
+         for(let i = 0; i < btns.length; i++){
+             btns[i].addEventListener('click', function(){
+               console.log('第' + i + '个按钮被点击');
+             })
+         }
+        </script>
+    </body>
+</html>

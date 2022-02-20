@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <div id = "app">
+          
+        
+        </div>
+        <script>
+            const app = new Vue({
+                el: '#app',  
+            })
+
+            const nums = [10 , 20 , 111 , 222 , 444 , 40 ,50]
+
+            // // 1.需求：取出所有小于100的数字
+            // let newNums = []
+            // for (let n of nums) {
+            //     if(n < 100){
+            //         newNums.push(n)
+            //     }
+            // }
+
+            // // 2.将所有小于100的数字全部*2
+            // let new2Nums = []
+            // for(let n of newNums){
+            //     new2Nums.push(n * 2)
+            // }
+
+            // // 3.需求：将所有new2Nums数字相加
+            // let total = 0
+            // for (let n of new2Nums){
+            //     total += n
+            // }
+
+            // 下面展示通过filter  map  reduce三个高阶函数来展示上面的需求
+
+            // 1.filter函数的使用
+            // 需求：取出所有小于100的数字
+            let newNums = nums.filter(function (n) {
+                return n < 100
+            })
+            console.log(newNums);
+
+            // 2.map函数的使用
+            // 将所有小于100的数字全部*2
+            let new2Nums = newNums.map(function (n){
+                return n * 2
+            })
+
+            console.log(new2Nums);
+
+            // 3.reduce函数的使用
+            // 对数组中所有的内容进行汇总
+            let total = new2Nums.reduce(function (preValue, n){
+                return preValue + n
+            }, 0)
+
+            console.log(total);
+
+
+            // 最后将这些高阶函数进行一个汇总写法
+            let tatal = nums.filter(function (n){
+                return n < 100
+            }).map(function (n){
+                return n*2
+            }).reduce(function (preValue, n){
+                return preValue + n
+            }, 0)
+               
+            console.log(total);
+
+            // 然而还可以更加简洁
+            let sum = nums.filter(n => n < 100).map(n => n * 2).reduce((pre , n) => pre + n);
+            
+            console.log(sum);
+
+            
+        </script>
+    </body>
+</html>

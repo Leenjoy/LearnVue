@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <div id = "app">
+            <!-- 修饰符 .lazy失去焦点或者enter键才显示-->
+            <input type="text" v-model.lazy="message">
+             <!-- v-model就相当于这两个的语法糖 -->
+             <input type="text" v-bind:value="message" v-on:input="message = $event.target.value">
+            <h2>{{message}}</h2>
+
+            <!-- 修饰符 .number -->
+            <input type="number" v-model.number='age'>
+            <h2>{{age}}-{{typeof age}}</h2>
+
+            <!-- 修饰符 .trim -->
+            <input type="text" v-model.trim='message'>
+            <h2>您输入的信息是trim：{{message}}</h2>
+
+           
+            <!-- 当没有写v-model时，需要写name属性且值要相同来实现radio之间的互斥（v-model就可以实现互斥效果） -->
+            <label for="male">
+                <input type="radio" id="male" value="男" v-model="sex">男
+            </label>
+            <label for="female">
+                <input type="radio" id="female" value="女" v-model="sex">女
+            </label>
+            <h2>您选择的性别是：{{sex}}</h2>
+
+            <!-- 1.checkbox单选框 -->
+            <label for="agree">
+                <input type="checkbox" id="agree" v-model="isAgree">同意协议
+            </label>
+            <h2>您的选择是：{{isAgree}}</h2>
+            <button :disabled="!isAgree">下一步</button><br />
+
+            <!-- 2.checkbox多选框 -->
+            <input type="checkbox" value="篮球" v-model="hobbies">篮球
+            <input type="checkbox" value="足球" v-model="hobbies">足球
+            <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+            <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+            <h2>您的爱好是：{{hobbies}}</h2>
+
+            <!-- 值绑定(区别于上面写死了value) -->
+            <label v-for="item in orginHobbies" :for="item">
+                <input type="checkbox" :value="item" :id="item" v-model="hobbies">{{item}}
+            </label>
+
+            <!-- 1.选择一个 -->
+            <select name="abc" v-model="fruit">
+                <option value="banana">banana</option>
+                <option value="apple">apple</option>
+                <option value="orange">orange</option>
+                <option value="grape">grape</option>
+            </select>
+            <h2>您的水果是：{{fruit}}</h2>
+
+            <!-- 1.选择多个 -->
+            <select name="abc" v-model="fruits" multiple>
+                <option value="banana">banana</option>
+                <option value="apple">apple</option>
+                <option value="orange">orange</option>
+                <option value="grape">grape</option>
+            </select>
+            <h2>您的水果是：{{fruits}}</h2>
+
+            
+
+
+
+
+
+        
+        </div>
+        <script>
+            const app = new Vue({
+                el: '#app',
+                data: {
+                   message: 'Hello World!',
+                   sex: '男',
+                   isAgree: false,   
+                   hobbies: [],
+                   orginHobbies: ['篮球','足球','羽毛球','排球'],
+                   fruit: 'banana',
+                   fruits: [],
+                   age: 0
+                },
+                methods:{
+                   
+                }
+            })
+        </script>
+    </body>
+</html>

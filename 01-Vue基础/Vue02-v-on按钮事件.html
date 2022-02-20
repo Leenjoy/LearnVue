@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <div id = app>
+            <h2>当前计数：{{counter}}</h2>
+            <button v-on:click="counter++">+</button>
+            <button v-on:click="counter--">-</button>
+
+            <button v-on:click="add">增1</button>
+            <button v-on:click="sub">减1</button>
+
+            <!-- v-on语法糖 -->
+            <button @click="add">增1</button>
+            <button @click="sub">减1</button>
+
+        </div>
+        <script>
+            const obj = {
+                counter : 0,
+                message : 'abc'
+            }
+            const app = new Vue({
+                el: '#app',
+                data: obj,
+                methods:{
+                    add : function(){
+                        console.log('增1');
+                        this.counter++
+                    },
+                    sub : function(){
+                        console.log('减1');
+                        this.counter--
+                    },
+                    
+                }
+            })
+        </script>
+    </body>
+</html>

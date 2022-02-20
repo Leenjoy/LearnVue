@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <style>
+        .active{
+            color: rgb(253, 10, 10);
+        }
+    </style>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <div id = app>
+           <h2>{{fullName}}</h2>
+           <h2>{{totallPrice}}</h2>
+          
+        </div>
+        <script>
+          const app = new Vue({
+                el: '#app',
+                data: {
+                    firstName: 'Cobe',
+                    lastName: 'Bryant',
+                    books: [
+                        {id: 100, name: 'linux编程', price: 100},
+                        {id: 102, name: 'java编程', price: 100},
+                        {id: 103, name: 'c编程', price: 100},
+                        {id: 104, name: 'C#编程', price: 100},
+                    ]
+                },
+                computed: {
+                    // 计算属性一般没有set方法，只读属性
+                    fullName: {
+                        set: function(newValue){
+                            const names = newValue.split(' ');
+                            this.firstName = names[0];
+                            this.lastName = names[1];
+                        },
+                        get: function(){
+                            return this.firstName + ' ' + this.lastName
+                        }
+                    },
+
+
+                    totallPrice: function(){
+                        let results = 0;
+                        for (let i=0; i<this.books.length;i++) {
+                           results += this.books[i].price
+                        }
+                        return results;
+                        // 法二
+                        // for (let book of this.books) {
+                        //     results += book.price
+                        // }
+                        // return results;
+                     
+                        
+                    }
+                }
+              
+            })
+        </script>
+    </body>
+</html>
